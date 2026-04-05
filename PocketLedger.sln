@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Api", "PocketL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Infrastructure", "PocketLedger.Infrastructure\PocketLedger.Infrastructure.csproj", "{6C5A9C76-419E-48C4-922B-36B9A0D0A8F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Domain", "PocketLedger.Domain\PocketLedger.Domain.csproj", "{0E803EB5-46C4-4DA6-B8E4-EA5BD717A1B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6C5A9C76-419E-48C4-922B-36B9A0D0A8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C5A9C76-419E-48C4-922B-36B9A0D0A8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C5A9C76-419E-48C4-922B-36B9A0D0A8F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E803EB5-46C4-4DA6-B8E4-EA5BD717A1B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E803EB5-46C4-4DA6-B8E4-EA5BD717A1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E803EB5-46C4-4DA6-B8E4-EA5BD717A1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E803EB5-46C4-4DA6-B8E4-EA5BD717A1B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
