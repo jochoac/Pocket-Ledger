@@ -1,4 +1,4 @@
-﻿namespace PocketLedger.Domain.Common.Primitives;
+﻿namespace PocketLedger.Domain.Common.Primitives.EnumTypes;
 
 public enum TransactionTypeValue
 {

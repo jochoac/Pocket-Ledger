@@ -1,10 +1,13 @@
 ﻿using LanguageExt;
 using PocketLedger.Domain.Common.ErrorTypes;
-using PocketLedger.Domain.Common.Primitives;
+using PocketLedger.Domain.Common.Primitives.EnumTypes;
+using PocketLedger.Domain.Common.Primitives.GuidTypes;
+using PocketLedger.Domain.Common.Primitives.NumericTypes;
+using PocketLedger.Domain.Common.Primitives.StringTypes;
 
 namespace PocketLedger.Domain.Ledger;
 
-using static LanguageExt.Prelude;
+using static Prelude;
 
 public sealed record LedgerEntry(
     LedgerEntryId Id,
@@ -13,9 +16,9 @@ public sealed record LedgerEntry(
     Option<SourceEventId> SourceEventId,
     TransactionType TransactionType,
     Money Amount,
-    CurrencyCode CurrencyCode,
-    EntryDescription Description,
-    Option<MerchantName> MerchantName,
+    Currency CurrencyCode,
+    Description Description,
+    Option<Name> MerchantName,
     Option<ExternalReference> ExternalReference,
     DateTimeOffset OccurredAt,
     DateTimeOffset CreatedAt)
@@ -27,9 +30,9 @@ public sealed record LedgerEntry(
         Option<SourceEventId> sourceEventId,
         TransactionType transactionType,
         Money amount,
-        CurrencyCode currencyCode,
-        EntryDescription description,
-        Option<MerchantName> merchantName,
+        Currency currencyCode,
+        Description description,
+        Option<Name> merchantName,
         Option<ExternalReference> externalReference,
         DateTimeOffset occurredAt,
         DateTimeOffset createdAt)
