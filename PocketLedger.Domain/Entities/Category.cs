@@ -1,7 +1,7 @@
-﻿using PocketLedger.Domain.Common.Primitives.GuidTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
+﻿namespace PocketLedger.Domain.Entities;
 
-namespace PocketLedger.Domain.Ledger;
+using Common.Primitives.GuidTypes;
+using Common.Primitives.StringTypes;
 
 public sealed class Category
 {

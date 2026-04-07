@@ -1,12 +1,13 @@
-﻿using LanguageExt;
-using PocketLedger.Domain.Common.ErrorTypes;
-using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
-using PocketLedger.Domain.Common.Primitives.NumericTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
+﻿using Prelude = LanguageExt.Prelude;
 
-namespace PocketLedger.Domain.Ledger;
+namespace PocketLedger.Domain.Entities;
 
+using LanguageExt;
+using Common.ErrorTypes;
+using Common.Primitives.EnumTypes;
+using Common.Primitives.GuidTypes;
+using Common.Primitives.NumericTypes;
+using Common.Primitives.StringTypes;
 using static Prelude;
 
 public sealed record LedgerEntry(
@@ -19,7 +20,7 @@ public sealed record LedgerEntry(
     Currency CurrencyCode,
     Description Description,
     Option<Name> MerchantName,
-    Option<ExternalReference> ExternalReference,
+    Option<ExternalId> ExternalId,
     DateTimeOffset OccurredAt,
     DateTimeOffset CreatedAt)
 {
@@ -33,7 +34,7 @@ public sealed record LedgerEntry(
         Currency currencyCode,
         Description description,
         Option<Name> merchantName,
-        Option<ExternalReference> externalReference,
+        Option<ExternalId> externalId,
         DateTimeOffset occurredAt,
         DateTimeOffset createdAt)
     {
@@ -73,7 +74,7 @@ public sealed record LedgerEntry(
                 currencyCode,
                 description,
                 merchantName,
-                externalReference,
+                externalId,
                 occurredAt,
                 createdAt);
     }

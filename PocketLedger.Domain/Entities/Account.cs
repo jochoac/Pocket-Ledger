@@ -1,12 +1,12 @@
-﻿using LanguageExt;
-using PocketLedger.Domain.Common.ErrorTypes;
-using static LanguageExt.Prelude;
-using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
-using PocketLedger.Domain.Common.Primitives.NumericTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
+﻿namespace PocketLedger.Domain.Entities;
 
-namespace PocketLedger.Domain.Ledger;
+using LanguageExt;
+using Common.ErrorTypes;
+using Common.Primitives.EnumTypes;
+using Common.Primitives.GuidTypes;
+using Common.Primitives.NumericTypes;
+using Common.Primitives.StringTypes;
+using static LanguageExt.Prelude;
 
 public sealed record Account(
     AccountId Id,
