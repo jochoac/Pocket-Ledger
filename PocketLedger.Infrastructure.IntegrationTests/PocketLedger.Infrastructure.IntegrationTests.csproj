@@ -12,7 +12,7 @@
         <PackageReference Include="FluentAssertions" Version="8.9.0" />
         <PackageReference Include="LanguageExt.UnitTesting" Version="4.4.9.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
-        <PackageReference Include="NSubstitute" Version="5.3.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
         <PackageReference Include="xunit" Version="2.9.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4"/>
     </ItemGroup>
@@ -22,8 +22,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PocketLedger.Core\PocketLedger.Core.csproj" />
       <ProjectReference Include="..\PocketLedger.Domain\PocketLedger.Domain.csproj" />
+      <ProjectReference Include="..\PocketLedger.Infrastructure\PocketLedger.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -16,4 +16,9 @@
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\PocketLedger.Core\PocketLedger.Core.csproj" />
+      <ProjectReference Include="..\PocketLedger.Domain\PocketLedger.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -23,3 +23,6 @@ public sealed record DuplicateEntityError(string EntityName, string Value)
 
 public sealed record UnexpectedError(string Reason)
     : InternalError(Reason);
+    
+public sealed record ExceptionError(string Reason, Exception Exception)
+    : InternalError($"An exception occurred. {Reason} Exception: {Exception.Message}");

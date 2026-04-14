@@ -44,4 +44,7 @@ public static class Errors
 
     public static Validation<Error, T> Internal<T>(string reason) =>
         Validation<T>(new UnexpectedError(reason));
+
+    public static Validation<Error, T> ExceptionError<T>(string reason, Exception ex) =>
+        Validation<T>(new ExceptionError(reason, ex));
 }
