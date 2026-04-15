@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Core.UnitTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Infrastructure.IntegrationTests", "PocketLedger.Infrastructure.IntegrationTests\PocketLedger.Infrastructure.IntegrationTests.csproj", "{41FB473E-D839-48EA-ACFA-3F599A50D81D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketLedger.Api.IntegrationTests", "PocketLedger.Api.IntegrationTests\PocketLedger.Api.IntegrationTests.csproj", "{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +46,14 @@ Global
 		{41FB473E-D839-48EA-ACFA-3F599A50D81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41FB473E-D839-48EA-ACFA-3F599A50D81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41FB473E-D839-48EA-ACFA-3F599A50D81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CDF3EFFA-63E8-4288-8DA7-B1C58EA4F56D} = {DF6705EC-FC3A-4033-A7AE-96E3FA134714}
 		{41FB473E-D839-48EA-ACFA-3F599A50D81D} = {DF6705EC-FC3A-4033-A7AE-96E3FA134714}
+		{A8261B26-0FB4-4003-B3F8-6DE6DEA720EE} = {DF6705EC-FC3A-4033-A7AE-96E3FA134714}
 	EndGlobalSection
 EndGlobal

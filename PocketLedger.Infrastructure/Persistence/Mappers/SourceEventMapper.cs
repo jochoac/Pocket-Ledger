@@ -16,9 +16,9 @@ public static class SourceEventMapper
             Id = sourceEvent.Id.Value,
             SourceType = (int)sourceEvent.Type.Value,
             RawPayload = sourceEvent.RawPayload.Value,
-            ReceivedAt = sourceEvent.ReceivedAt,
+            ReceivedAt = sourceEvent.ReceivedAt.ToUniversalTime(),
             OccurredAt = sourceEvent.OccurredAt
-                .Map(occurredAt => (DateTimeOffset?)occurredAt)
+                .Map(occurredAt => (DateTimeOffset?)occurredAt.ToUniversalTime())
                 .IfNoneUnsafe(() => null),
             ExternalId = sourceEvent.ExternalId
                 .Map(string? (id) => id.Value)

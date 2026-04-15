@@ -1,8 +1,7 @@
 ﻿using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace PocketLedger.Domain.Common.ErrorTypes;
-
-using static Prelude;
 
 public static class Errors
 {
@@ -13,7 +12,7 @@ public static class Errors
         Fail<Error, T>(errors);
 
     public static Validation<Error, T> Success<T>(T value) =>
-        LanguageExt.Prelude.Success<Error, T>(value);
+       Success<Error, T>(value);
 
     public static Either<Error, T> Left<T>(Error error) =>
         Prelude.Left<Error, T>(error);
