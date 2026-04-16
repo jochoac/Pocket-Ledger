@@ -2,7 +2,9 @@
 using LanguageExt;
 using LanguageExt.UnitTesting;
 using Microsoft.EntityFrameworkCore;
+using PocketLedger.Domain.Common.ErrorTypes;
 using PocketLedger.Domain.Common.Primitives.EnumTypes;
+using PocketLedger.Domain.Common.Primitives.GuidTypes;
 using PocketLedger.Domain.Common.Primitives.StringTypes;
 using PocketLedger.Domain.Entities;
 using PocketLedger.Infrastructure.IntegrationTests.Common;
@@ -62,6 +64,44 @@ public sealed class SourceEventRepositoryTests : IAsyncLifetime
         persistedEntity.ReceivedAt.Should().BeCloseTo(sourceEvent.ReceivedAt, TimeSpan.FromMilliseconds(1));
         persistedEntity.OccurredAt.ShouldBeNone();
         persistedEntity.ExternalId.ShouldBeNone();
+    }
+    
+    [Fact]
+    public async Task GetById_GivenExistingSourceEvent_ReturnsIt()
+    {
+        // Arrange
+        var sourceEvent = BuildSourceEvent();
+
+        await _repository.Add(sourceEvent, CancellationToken.None);
+
+        // Act
+        var vSourceEvent = await _repository.GetById(sourceEvent.Id, CancellationToken.None);
+
+        // Assert
+        vSourceEvent.ShouldBeSuccess(found =>
+        {
+            found.Id.Should().Be(sourceEvent.Id);
+            found.Type.Should().Be(sourceEvent.Type);
+            found.RawPayload.Value.Should().NotBeNullOrWhiteSpace();
+            found.RawPayload.Value.Should().Contain("Wallet");
+            found.RawPayload.Value.Should().Contain("OXXO");
+            found.RawPayload.Value.Should().Contain("23500");
+            found.ReceivedAt.Should().BeCloseTo(sourceEvent.ReceivedAt, TimeSpan.FromMilliseconds(1));
+            found.ExternalId.ShouldBeNone();
+        });
+    }
+    
+    [Fact]
+    public async Task GetById_GivenMissingSourceEvent_ReturnsNotFound()
+    {
+        // Arrange
+        var sourceEventId = SourceEventId.New();
+
+        // Act
+        var vSourceEvent = await _repository.GetById(sourceEventId, CancellationToken.None);
+
+        // Assert
+        vSourceEvent.ShouldBeFail(errors => errors.Head.Should().BeOfType<EntityNotFoundError>());
     }
 
     private static SourceEvent BuildSourceEvent() =>

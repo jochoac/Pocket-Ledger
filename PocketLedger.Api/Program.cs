@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using PocketLedger.Api.SourceEvents.GetSourceEventById;
 using PocketLedger.Api.SourceEvents.RegisterSourceEvent;
 using PocketLedger.Core.SourceEvents.Ports;
+using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
 using PocketLedger.Core.SourceEvents.UseCases.RegisterSourceEvent;
 using PocketLedger.Infrastructure.Persistence;
 using PocketLedger.Infrastructure.Persistence.Repositories;
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<PocketLedgerDbContext>(options =>
 
 //DI
 builder.Services.AddScoped<RegisterSourceEventHandler>();
+builder.Services.AddScoped<GetSourceEventHandler>();
 builder.Services.AddScoped<ISourceEventRepository, SourceEventRepository>();
 
 //Swagger
@@ -32,6 +35,9 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => "Pocket Ledger API");
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+//ENDPOINTS
+//Source Events
 app.MapRegisterSourceEventEndpoint();
+app.MapGetSourceEventByIdEndpoint();
 
 app.Run();

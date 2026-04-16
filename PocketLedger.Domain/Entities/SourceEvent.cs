@@ -34,8 +34,8 @@ public sealed class SourceEvent
         SourceEventType type,
         RawPayload rawPayload,
         DateTimeOffset receivedAt,
-        Option<DateTimeOffset> occurredAt,
-        Option<ExternalId> externalId)
+        Option<DateTimeOffset> occurredAt = default,
+        Option<ExternalId> externalId = default)
         => new(
             SourceEventId.New(),
             type,

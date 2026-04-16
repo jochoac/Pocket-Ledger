@@ -30,7 +30,7 @@ public sealed class RegisterSourceEventEndpointTests(PocketLedgerApiFactory fact
 
         var body = await response.Content.ReadFromJsonAsync<RegisterSourceEventResponse>();
         body.Should().NotBeNull();
-        body!.SourceEventId.Should().NotBeEmpty();
+        body.SourceEventId.Should().NotBeEmpty();
 
         response.Headers.Location.Should().NotBeNull();
         response.Headers.Location!.ToString()
@@ -56,7 +56,7 @@ public sealed class RegisterSourceEventEndpointTests(PocketLedgerApiFactory fact
 
         var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>();
         problem.Should().NotBeNull();
-        problem!.Title.Should().Be("Invalid source type");
+        problem.Title.Should().Be("Invalid source type");
         problem.Detail.Should().Be("Unsupported source type 'not-a-valid-type'.");
         problem.Status.Should().Be((int)HttpStatusCode.BadRequest);
     }
