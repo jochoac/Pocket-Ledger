@@ -4,7 +4,7 @@ using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
 using PocketLedger.Domain.Entities;
 using static PocketLedger.Domain.Common.Prelude;
 
-namespace PocketLedger.Api.SourceEvents.GetSourceEventById;
+namespace PocketLedger.Api.SourceEvents.GetSourceEvents;
 
 public static class GetSourceEventByIdEndpoint
 {
@@ -34,7 +34,7 @@ public static class GetSourceEventByIdEndpoint
     private static GetSourceEventByIdResponse MapResponse(SourceEvent sourceEvent) =>
         new(
             sourceEvent.Id.Value,
-            sourceEvent.Type.ToString().ToLowerInvariant(), 
+            sourceEvent.Type.ToString().ToLowerInvariant(),
             sourceEvent.RawPayload.Value,
             sourceEvent.ReceivedAt,
             sourceEvent.ExternalId.IfNone(string.Empty));

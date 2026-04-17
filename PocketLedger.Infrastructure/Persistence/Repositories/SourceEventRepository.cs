@@ -1,10 +1,12 @@
 ﻿using LanguageExt;
 using Microsoft.EntityFrameworkCore;
+using PocketLedger.Core.SourceEvents.Models;
 using PocketLedger.Core.SourceEvents.Ports;
 using PocketLedger.Domain.Common.ErrorTypes;
 using PocketLedger.Domain.Common.Primitives.GuidTypes;
 using PocketLedger.Domain.Entities;
 using PocketLedger.Infrastructure.Persistence.Mappers;
+using PocketLedger.Infrastructure.Persistence.Extensions;
 using static LanguageExt.Prelude;
 
 namespace PocketLedger.Infrastructure.Persistence.Repositories;
@@ -48,6 +50,27 @@ public sealed class SourceEventRepository(PocketLedgerDbContext dbContext) : ISo
         catch (Exception ex)
         {
             return Errors.ExceptionError<SourceEvent>($"Unexpected error while fetching source event. {ex.Message}", ex);
+        }
+    }
+
+    public async Task<Validation<Error, Seq<SourceEvent>>> List(SourceEventFilters filters, CancellationToken ct)
+    {
+        try
+        {
+            var query = dbContext.SourceEvents
+                .AsNoTracking()
+                .Apply(filters)
+                .OrderByDescending(evt => evt.ReceivedAt);
+
+            var entities = await query.ToListAsync(ct);
+
+            return toSeq(entities.Map(SourceEventMapper.ToDomain));
+        }
+        catch (Exception ex)
+        {
+            return Errors.ExceptionError<Seq<SourceEvent>>(
+                $"Unexpected error while listing source events. {ex.Message}",
+                ex);
         }
     }
 }

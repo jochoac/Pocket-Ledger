@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using LanguageExt.UnitTesting;
 using NSubstitute;
+using PocketLedger.Core.SourceEvents.Models;
 using PocketLedger.Core.SourceEvents.Ports;
 using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
 using PocketLedger.Domain.Common.ErrorTypes;
@@ -59,5 +60,29 @@ public sealed class GetSourceEventHandlerTests
 
         // Assert
         vSourceEvent.ShouldBeFail(errors => errors.Head().Should().BeOfType<EntityNotFoundError>());
+    }
+
+    [Fact]
+    public async Task Handle_GivenFilters_ReturnsSourceEventsFromRepository()
+    {
+        // Arrange
+        var filters = new SourceEventFilters(
+            SourceType: SourceEventType.Wallet,
+            ExternalId: None);
+
+        var sourceEvents = Seq(
+            SourceEventHelpers.BuildSourceEvent(),
+            SourceEventHelpers.BuildSourceEvent()
+        );
+
+        _sourceEventRepository
+            .List(filters, Arg.Any<CancellationToken>())
+            .Returns(sourceEvents);
+
+        // Act
+        var vResult = await _handler.ListSourceEvents(filters, CancellationToken.None);
+
+        // Assert
+        vResult.ShouldBeSuccess(foundEvents => foundEvents.Should().HaveCount(2));
     }
 }

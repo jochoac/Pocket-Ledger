@@ -1,4 +1,7 @@
-﻿namespace PocketLedger.Domain.Common.Primitives.EnumTypes;
+﻿using LanguageExt;
+using PocketLedger.Domain.Common.ErrorTypes;
+
+namespace PocketLedger.Domain.Common.Primitives.EnumTypes;
 
 using Primitives;
 
@@ -22,6 +25,15 @@ public readonly record struct SourceEventType(SourceEventTypeValue Value) : IPri
     public static SourceEventType Webhook => new(SourceEventTypeValue.Webhook);
     public static SourceEventType Manual => new(SourceEventTypeValue.Manual);
     public static SourceEventType Import => new(SourceEventTypeValue.Import);
+
+    public static Validation<Error, SourceEventType> Parse(string value) =>
+        value.Trim().ToLowerInvariant() switch
+        {
+            "manual" => Manual,
+            "wallet" => Wallet,
+            "sms" => Sms,
+            _ => Errors.InvalidValue<SourceEventType>(value, $"Invalid source event type '{value}'.")
+        };
 
     public override string ToString() => Value.ToString();
 

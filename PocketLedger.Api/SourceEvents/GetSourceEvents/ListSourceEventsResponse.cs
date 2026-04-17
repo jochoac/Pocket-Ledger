@@ -1,6 +1,6 @@
-﻿namespace PocketLedger.Api.SourceEvents.GetSourceEventById;
+﻿namespace PocketLedger.Api.SourceEvents.GetSourceEvents;
 
-public sealed record GetSourceEventByIdResponse(
+public sealed record ListSourceEventResponse(
     Guid SourceEventId,
     string SourceType,
     string RawPayload,

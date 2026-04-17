@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PocketLedger.Api.SourceEvents.GetSourceEventById;
+using PocketLedger.Api.SourceEvents.GetSourceEvents;
 using PocketLedger.Api.SourceEvents.RegisterSourceEvent;
 using PocketLedger.Core.SourceEvents.Ports;
 using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
@@ -39,5 +39,6 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 //Source Events
 app.MapRegisterSourceEventEndpoint();
 app.MapGetSourceEventByIdEndpoint();
+app.MapListSourceEventsEndpoint();
 
 app.Run();

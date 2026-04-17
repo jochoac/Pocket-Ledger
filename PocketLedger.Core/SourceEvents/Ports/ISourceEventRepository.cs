@@ -1,4 +1,5 @@
 ﻿using LanguageExt;
+using PocketLedger.Core.SourceEvents.Models;
 using PocketLedger.Domain.Common.ErrorTypes;
 using PocketLedger.Domain.Common.Primitives.GuidTypes;
 using PocketLedger.Domain.Entities;
@@ -9,4 +10,5 @@ public interface ISourceEventRepository
 {
     Task<Validation<Error, SourceEvent>> Add(SourceEvent sourceEvent, CancellationToken cancellationToken);
     Task<Validation<Error, SourceEvent>> GetById(SourceEventId id, CancellationToken ct);
+    Task<Validation<Error, Seq<SourceEvent>>> List(SourceEventFilters filters, CancellationToken ct);
 }
