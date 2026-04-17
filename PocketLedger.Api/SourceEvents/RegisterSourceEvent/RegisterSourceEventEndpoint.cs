@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using PocketLedger.Core.SourceEvents.UseCases.RegisterSourceEvent;
 using PocketLedger.Domain.Common.LanguageExt;
 using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
 using static LanguageExt.Prelude;
+using static PocketLedger.Domain.Common.Prelude;
 
 namespace PocketLedger.Api.SourceEvents.RegisterSourceEvent;
 
@@ -37,9 +37,9 @@ public static class RegisterSourceEventEndpoint
             {
                 var command = new RegisterSourceEventCommand(
                     parsedSourceType,
-                    new RawPayload(request.RawPayload),
+                    RawPayload(request.RawPayload),
                     request.ReceivedAt,
-                    Optional(request.ExternalId).Map(static x => new ExternalId(x)));
+                    Optional(request.ExternalId).Map(static x => ExternalId(x)));
 
                 var result = await handler.Handle(command, cancellationToken);
 

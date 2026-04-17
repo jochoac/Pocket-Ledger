@@ -4,7 +4,6 @@ using LanguageExt.UnitTesting;
 using Microsoft.EntityFrameworkCore;
 using PocketLedger.Domain.Common.ErrorTypes;
 using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
 using PocketLedger.Domain.Common.Primitives.StringTypes;
 using PocketLedger.Domain.Entities;
 using PocketLedger.Infrastructure.IntegrationTests.Common;
@@ -12,6 +11,8 @@ using PocketLedger.Infrastructure.Persistence;
 using PocketLedger.Infrastructure.Persistence.Mappers;
 using PocketLedger.Infrastructure.Persistence.Repositories;
 using static LanguageExt.Prelude;
+using static PocketLedger.Domain.Common.Prelude;
+using SourceEventId = PocketLedger.Domain.Common.Primitives.GuidTypes.SourceEventId;
 
 namespace PocketLedger.Infrastructure.IntegrationTests.SourceEvents;
 
@@ -114,7 +115,7 @@ public sealed class SourceEventRepositoryTests : IAsyncLifetime
 
     private static SourceEventType BuildSourceType() => SourceEventType.Wallet;
     private static RawPayload BuildRawPayload() =>
-        new("""
+        RawPayload("""
             {
               "source": "Wallet",
               "message": "Compra aprobada por 23500 COP en OXXO",

@@ -8,6 +8,7 @@ using PocketLedger.Domain.Common.Primitives.EnumTypes;
 using PocketLedger.Domain.Common.Primitives.StringTypes;
 using PocketLedger.Domain.Entities;
 using static LanguageExt.Prelude;
+using static PocketLedger.Domain.Common.Prelude;
 
 namespace PocketLedger.Core.UnitTests.SourceEvents.RegisterSourceEvent;
 
@@ -81,6 +82,6 @@ public sealed class RegisterSourceEventHandlerTests
             ReceivedAt: DateTimeOffset.UtcNow);
 
     private static SourceEventType BuildSourceType() => SourceEventType.Wallet;
-    private static RawPayload BuildRawPayload() => new("test payload");
+    private static RawPayload BuildRawPayload() => RawPayload("test payload");
     private static Option<ExternalId> BuildExternalId() => None;
 }

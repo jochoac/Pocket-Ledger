@@ -5,10 +5,10 @@ using PocketLedger.Core.SourceEvents.Ports;
 using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
 using PocketLedger.Domain.Common.ErrorTypes;
 using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
 using PocketLedger.Domain.Entities;
 using static LanguageExt.Prelude;
+using static PocketLedger.Domain.Common.Prelude;
+using SourceEventId = PocketLedger.Domain.Common.Primitives.GuidTypes.SourceEventId;
 
 namespace PocketLedger.Core.UnitTests.SourceEvents.RegisterSourceEvent;
 
@@ -28,10 +28,10 @@ public sealed class GetSourceEventHandlerTests
         // Arrange
         var sourceEventId = SourceEventId.New();
         var sourceEvent = SourceEvent.Create(
-                SourceEventType.Manual,
-                new RawPayload("""{ "description": "Lunch", "amount": 25000 }"""),
-                new DateTimeOffset(2026, 4, 15, 15, 0, 0, TimeSpan.Zero),
-                externalId: new ExternalId("manual-001"));
+            SourceEventType.Manual,
+            RawPayload("""{ "description": "Lunch", "amount": 25000 }"""),
+            new DateTimeOffset(2026, 4, 15, 15, 0, 0, TimeSpan.Zero),
+            externalId: ExternalId("manual-001"));
 
         _sourceEventRepository
             .GetById(sourceEventId, Arg.Any<CancellationToken>())
@@ -43,7 +43,7 @@ public sealed class GetSourceEventHandlerTests
         // Assert
         vSourceEvent.ShouldBeSuccess(found => found.Should().Be(sourceEvent));
     }
-    
+
     [Fact]
     public async Task GetSourceEventByIdAsync_GivenMissingSourceEvent_ReturnsNotFound()
     {

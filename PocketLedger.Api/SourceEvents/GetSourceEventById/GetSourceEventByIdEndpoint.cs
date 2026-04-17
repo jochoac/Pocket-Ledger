@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PocketLedger.Api.Common.Http;
 using PocketLedger.Core.SourceEvents.UseCases.GetSourceEvent;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
 using PocketLedger.Domain.Entities;
+using static PocketLedger.Domain.Common.Prelude;
 
 namespace PocketLedger.Api.SourceEvents.GetSourceEventById;
 
@@ -25,7 +25,7 @@ public static class GetSourceEventByIdEndpoint
         GetSourceEventHandler handler,
         CancellationToken cancellationToken)
     {
-        var vSourceEvent = await handler.GetSourceEventByIdAsync(new SourceEventId(id), cancellationToken);
+        var vSourceEvent = await handler.GetSourceEventByIdAsync(SourceEventId(id), cancellationToken);
         return vSourceEvent
             .Map(sourceEvent => Results.Ok(MapResponse(sourceEvent)))
             .IfFail(HttpErrorMapper.ToProblem);

@@ -1,9 +1,8 @@
 ﻿using PocketLedger.Domain.Common.Primitives.EnumTypes;
-using PocketLedger.Domain.Common.Primitives.GuidTypes;
-using PocketLedger.Domain.Common.Primitives.StringTypes;
 using PocketLedger.Domain.Entities;
 using PocketLedger.Infrastructure.Persistence.Models;
 using static LanguageExt.Prelude;
+using static PocketLedger.Domain.Common.Prelude;
 
 namespace PocketLedger.Infrastructure.Persistence.Mappers;
 
@@ -29,13 +28,13 @@ public static class SourceEventMapper
 
     public static SourceEvent ToDomain(SourceEventRecord record) =>
         SourceEvent.Rehydrate(
-            new SourceEventId(record.Id),
+            SourceEventId(record.Id),
             new SourceEventType((SourceEventTypeValue)record.SourceType),
-            new RawPayload(record.RawPayload),
+            RawPayload(record.RawPayload),
             record.ReceivedAt,
             Optional(record.OccurredAt),
             Optional(record.ExternalId)
                 .Filter(static x => !string.IsNullOrWhiteSpace(x))
-                .Map(static x => new ExternalId(x))
+                .Map(static x => ExternalId(x))
         );
 }

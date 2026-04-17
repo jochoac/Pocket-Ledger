@@ -6,16 +6,14 @@ using PocketLedger.Domain.Common.LanguageExt.Extensions;
 using PocketLedger.Domain.Common.Primitives.StringTypes;
 using static LanguageExt.Prelude;
 using Error = PocketLedger.Domain.Common.ErrorTypes.Error;
+using static PocketLedger.Domain.Common.Prelude;
 
 namespace PocketLedger.Domain.Common.LanguageExt
 {
     public static class LanguageExtExtensions
     {
-        public static Validation<Error, Successful> Successfully =>
-            Success<Error, Successful>(new Successful());
-        
         public static Validation<Error, T> Fail<T>(this Seq<Error> self) =>
-            global::LanguageExt.Prelude.Fail<Error, T>(self);
+            Fail<Error, T>(self);
 
         public static Validation<Error, T> ToValidation<T>
             (this Try<T> self, Func<Exception, Error> failFunc)
@@ -53,8 +51,7 @@ namespace PocketLedger.Domain.Common.LanguageExt
                     var exceptionError = new ExceptionError($"Exception in operation: {ex.Message}", ex);
                     return Seq(exceptionError, createdError);
                 });
-        
-        
+
         public static Seq<T> OfType<T>(this Seq<Error> fs) where T : Error =>
             fs.Filter(f => f is T)
                 .Map(f => (T)f);
@@ -65,7 +62,7 @@ namespace PocketLedger.Domain.Common.LanguageExt
         public static ErrorMessage Combine(this Seq<ErrorMessage> errs)
         {
             var combined = errs.Map(f => f.Value).Combine("; ");
-            return new ErrorMessage(combined);
+            return ErrorMessage(combined);
         }
 
         public static string Combine<T>(this Seq<T> Errors) where T : Error
@@ -174,15 +171,4 @@ namespace PocketLedger.Domain.Common.LanguageExt
         // public static Option<T> ToOption<T>(this T? self) where T : struct =>
         //     self == null ? Option<T>.None : Some(self.Value);    }
     }
-
-    public readonly struct Successful
-    {
-        public override string ToString() => "Prelude.Successful";
-
-        // public Func<T, Successful> ly<T>() => o => Prelude.Successful;
-        public static Successful ly<T>(T t) => new();
-        public static implicit operator Func<Successful>(Successful s) => () => s;
-        public static implicit operator Func<object, Successful>(Successful s) => _ => s;
-    }
-    
 }

@@ -15,10 +15,10 @@ public static class Errors
        Success<Error, T>(value);
 
     public static Either<Error, T> Left<T>(Error error) =>
-        Prelude.Left<Error, T>(error);
+        Left<Error, T>(error);
 
     public static Either<Error, T> Right<T>(T value) =>
-        Prelude.Right<Error, T>(value);
+        Right<Error, T>(value);
 
     public static Validation<Error, T> Required<T>(string fieldName) =>
         Validation<T>(new RequiredValueError(fieldName));
